@@ -30,6 +30,6 @@ pip3 install --user --upgrade neovim
 
 nvim +PlugClean! +qall
 nvim +silent +PlugInstall +qall
-#python3 ~/.config/nvim/plugged/YouCompleteMe/install.py
+python3 ~/.config/nvim/plugged/YouCompleteMe/install.py
 
 echo "Open a new terminal!"
