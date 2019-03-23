@@ -1,16 +1,35 @@
 # This script installs other programs that are not managed
 # by brew or that didn't fit into any of the other scripts
 
-# This installs the spaceship theme for zsh
-# https://github.com/denysdovhan/spaceship-prompt
-if [ -d "$ZSH/custom/themes/spaceship-prompt" ]
-then
-    echo "spaceship-prompt is already installed, skipping..."
+# Save Homebrew’s installed location.
+BREW_PREFIX=$(brew --prefix)
+ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
+
+echo "####################"
+echo "Installing plug.vim!"
+echo "####################"
+if [ ! -f ~/.config/nvim/autoload/plug.vim ]; then
+    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 else
-    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt"
-    ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme"
+    echo "plug.vim already installed"
 fi
 
-# Installing rustup (for managing Rust)
-curl https://sh.rustup.rs -sSf | sh
-source $HOME/.cargo/env
+echo "####################"
+echo "Installing antigen!"
+echo "####################"
+if [ ! -f ~/antigen.zsh ]; then
+    curl -L git.io/antigen > ~/antigen.zsh
+else
+    echo "antigen already installed"
+fi
+
+# This is needed for python support on Neovim for YouCompleteMe
+# Please see https://github.com/neovim/neovim/issues/1315
+pip3 install --user --upgrade neovim
+
+nvim +PlugClean! +qall
+nvim +silent +PlugInstall +qall
+#python3 ~/.config/nvim/plugged/YouCompleteMe/install.py
+
+echo "Open a new terminal!"

@@ -1,1 +1,7 @@
 .DS_Store
+.projectile
+.vscode/
+dump_error.log
+emacs.d/autosaves/*
+emacs.d/backups/*
+.elixir_ls/

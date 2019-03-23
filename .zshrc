@@ -1,38 +1,34 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# makes color constants available
+autoload -U colors
+colors
 
-# This is a workaround for having a system node and NVM node
-PATH="/usr/local/bin:$(getconf PATH)"
+# enable colored output from ls, etc. on FreeBSD-based systems
+export CLICOLOR=1
 
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/${USER}/.oh-my-zsh
+# This is to make `gnu-sed` available as `sed`
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+# config for .zshrc
+source /Users/gturner/antigen.zsh
 
-# Disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-# How often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
-# Display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  z
-  git
-  osx
-  chucknorris # ¯\_(ツ)_/¯
-)
-
-source $ZSH/oh-my-zsh.sh
+# Tell Antigen that you're done.
+antigen apply
 
 # User configuration
 
@@ -56,13 +52,41 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add cargo to the PATH
-source $HOME/.cargo/env
-
 # Use nvim as the default editor
 export EDITOR=nvim
+
+# Other
+if [ -e "/Users/gturner/google-cloud-sdk/completion.zsh.inc" ]; then
+  source '/Users/gturner/google-cloud-sdk/completion.zsh.inc'
+fi
+
+if [ -e '/Users/gturner/google-cloud-sdk/path.zsh.inc' ]; then
+  source '/Users/gturner/google-cloud-sdk/path.zsh.inc'
+fi
+
+if [ -e '/Users/gturner/development/kube-ps1/kube-ps1.sh' ]; then
+  source '/Users/gturner/development/kube-ps1/kube-ps1.sh'
+  PROMPT='$(kube_ps1) '$PROMPT
+fi
+
+if [ -e '/Applications/Postgres.app/' ]; then
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+fi
+
+if [ -e '/Applications/Julia-1.0.app/' ]; then
+  export PATH="/Applications/Julia-1.0.app/Contents/Resources/julia/bin:$PATH"
+fi
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+export PATH="$HOME/.bin:$PATH"
+export PATH=/usr/local/bin:$PATH
+source /Users/gturner/.asdf/asdf.sh
+export EDITOR=vim
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export GOPATH=$HOME/development/go
+export PATH="~/.cargo/bin:$PATH"
+export BAT_THEME=GitHub

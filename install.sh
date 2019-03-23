@@ -7,6 +7,22 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 git pull origin master;
 
+echo "####################"
+echo "Installing Homebrew!"
+echo "####################"
+which -s brew
+if [[ $? != 0 ]] ; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+	echo "Homebrew already installed, updating..."
+    brew update
+fi
+
+echo "####################"
+echo "Installing Homebrew Packages!"
+echo "####################"
+brew bundle
+
 function doIt() {
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
@@ -14,17 +30,19 @@ function doIt() {
 		--exclude "README.md" \
 		--exclude "LICENSE" \
 		--exclude "terminal-demo.png" \
+		--exclude "Brewfile" \
+		--exclude "misc-installs.sh" \
+		--exclude "Nord.itermcolors" \
 		-avh --no-perms . ~;
-	source ~/.bash_profile;
 }
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-	doIt;
-else
-	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-	echo "";
+read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		doIt;
-	fi;
+	echo "####################"
+	echo "Syncing Files"
+	echo "####################"
+	doIt;
+	./misc-installs.sh
 fi;
 unset doIt;

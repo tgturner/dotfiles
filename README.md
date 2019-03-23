@@ -60,11 +60,6 @@ $ . ./dotfiles/install.sh
 Unfortunately, life has not yet given me the opportunity to make everything in this repo automatic, so here's a few things you will have to do by yourself:
 
 
-### Install tmux plugins
-
-Once you have ran `install.sh` to copy dotfiles to their right places (including `.tmux.conf`), open `tmux` and press `prefix` (<kbd>ctrl</kbd> + <kbd>a</kbd>) + <kbd>I</kbd> (capital I, as in **I**nstall) to fetch the plugin.
-
-
 ### Set Iterm's color preset
 
 Open Iterm configs by pressing <kbd>command</kbd> + <kbd>,</kbd>, go to `Profiles` and then `Colors`.
