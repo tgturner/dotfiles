@@ -24,12 +24,7 @@ else
     echo "antigen already installed"
 fi
 
-# This is needed for python support on Neovim for YouCompleteMe
-# Please see https://github.com/neovim/neovim/issues/1315
-pip3 install --user --upgrade neovim
-
 nvim +PlugClean! +qall
 nvim +silent +PlugInstall +qall
-python3 ~/.config/nvim/plugged/YouCompleteMe/install.py
 
 echo "Open a new terminal!"
