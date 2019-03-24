@@ -90,3 +90,8 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export GOPATH=$HOME/development/go
 export PATH="~/.cargo/bin:$PATH"
 export BAT_THEME=GitHub
+
+if [ -d "/Users/gturner/.notion" ]; then
+  export NOTION_HOME=~/.notion
+  export PATH="$NOTION_HOME/bin:$PATH"
+fi
