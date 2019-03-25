@@ -39,8 +39,8 @@ brew "python3"
 
 # Change the user's life forever
 # God bless the best text editor on earth
-brew "vim", args: ["with-override-system-vi"]
-brew "neovim", args: ["with-override-system-vi"]
+brew "vim"
+brew "neovim"
 
 # Install other useful binaries.
 brew "git"
