@@ -10,7 +10,8 @@ set lazyredraw              " Only redraw when necessary
 set cursorline              " Find the current line quickly.
 filetype on                 " Enable filetype detection
 filetype indent on          " Enable filetype-specific indenting
-filetype plugin on          " Enable filetype-specific plugins
+filetype plugin on
+
 
 
 
@@ -48,9 +49,11 @@ Plug 'editorconfig/editorconfig-vim'
 " linting engine
 Plug 'w0rp/ale'
 
-Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
+Plug 'janko-m/vim-test'
 
 call plug#end()
 
@@ -59,6 +62,15 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Related Configs
 """""""""""""""""""""""""""""""""""""""""""""""
+
+:tnoremap <Esc> <C-\><C-n>
+let test#strategy = "neovim"
+
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
 " Neomake async hooks
 call neomake#configure#automake('w')
