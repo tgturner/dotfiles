@@ -1,4 +1,16 @@
+
 """""""""""""""""""""""""""""""""""""""""""""""
+f (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+endif"""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""
 
@@ -23,7 +35,9 @@ call plug#begin()
 
 " nord-vim colorscheme
 Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
 
+Plug 'sheerun/vim-polyglot'
 " neomake
 Plug 'neomake/neomake'
 
@@ -55,6 +69,14 @@ Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'janko-m/vim-test'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 call plug#end()
 
 
@@ -66,6 +88,7 @@ call plug#end()
 :tnoremap <Esc> <C-\><C-n>
 let test#strategy = "neovim"
 
+let g:deoplete#enable_at_startup = 1
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
@@ -109,7 +132,7 @@ endif
 set t_Co=256
 
 " set colorscheme
-colorscheme nord
+colorscheme onedark
 
 " long lines as just one line (have to scroll horizontally)
 set nowrap
@@ -198,3 +221,5 @@ set si
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+autocmd BufWritePost *.exs,*.ex silent :!mix format %" => General
+
