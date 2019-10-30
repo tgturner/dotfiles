@@ -24,7 +24,7 @@ antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
 
 # Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 
 # Tell Antigen that you're done.
@@ -64,17 +64,9 @@ if [ -e '/Users/gturner/google-cloud-sdk/path.zsh.inc' ]; then
   source '/Users/gturner/google-cloud-sdk/path.zsh.inc'
 fi
 
-if [ -e '/Users/gturner/development/kube-ps1/kube-ps1.sh' ]; then
-  source '/Users/gturner/development/kube-ps1/kube-ps1.sh'
-  PROMPT='$(kube_ps1) '$PROMPT
-fi
 
 if [ -e '/Applications/Postgres.app/' ]; then
   export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-fi
-
-if [ -e '/Applications/Julia-1.0.app/' ]; then
-  export PATH="/Applications/Julia-1.0.app/Contents/Resources/julia/bin:$PATH"
 fi
 
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -87,11 +79,10 @@ export EDITOR=vim
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export GOPATH=$HOME/development/go
 export PATH="~/.cargo/bin:$PATH"
-export BAT_THEME=GitHub
 
-if [ -d "/Users/gturner/.notion" ]; then
-  export NOTION_HOME=~/.notion
-  export PATH="$NOTION_HOME/bin:$PATH"
-fi
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/sbin:$PATH"
+
