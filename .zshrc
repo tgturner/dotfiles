@@ -74,14 +74,8 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export PATH="$HOME/.bin:$PATH"
 export PATH=/usr/local/bin:$PATH
-source /Users/gturner/.asdf/asdf.sh
 export EDITOR=vim
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/usr/local/opt/libxml2/bin:$PATH"
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export PATH="~/.cargo/bin:$PATH"
 
-export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/sbin:$PATH"

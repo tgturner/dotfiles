@@ -64,8 +64,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 
 Plug 'fatih/vim-go'
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'janko-m/vim-test'
 
