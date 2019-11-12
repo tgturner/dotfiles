@@ -52,14 +52,14 @@ brew "mysql@5.6", restart_service: true, link: true, conflicts_with: ["mysql"]
 ###################################
 ####### CASKS #####################
 ###################################
-cask "google-chrome"
-cask "firefox"
-cask "iterm2"
-cask "spotify"
-cask "dropbox"
-cask "insomnia"
+# cask "google-chrome"
+# cask "firefox"
+# cask "iterm2"
+# cask "spotify"
+# cask "dropbox"
+# cask "insomnia"
 
 ###################################
 ####### MAS #######################
 ###################################
-mas "1Password", id: 443987910
+# mas "1Password", id: 443987910
