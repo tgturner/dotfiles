@@ -74,9 +74,37 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export PATH="$HOME/.bin:$PATH"
 export PATH=/usr/local/bin:$PATH
-export EDITOR=vim
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/sbin:$PATH"
 
+# export PATH=$PATH:/usr/local/go/bin
+export PATH="${HOME}/sdk/go1.14.9/bin:${HOME}/development/gopath/bin:${PATH}"
+# export PATH="${HOME}/sdk/go1.13.7/bin:${HOME}/development/gopath/bin:${PATH}"
+export GOPATH="${HOME}/development/gopath:${HOME}/development/godev"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="${HOME}/sdk/go_appengine:${PATH}"
+
+if [ -f ${HOME}/.config/gcloud/application_default_credentials.json ]; then
+  export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/.config/gcloud/application_default_credentials.json
+fi
+
+# pendo git tools setup
+export PATH="${HOME}/development/pendo-appengine/tools/gitcmds:${PATH}"
+source "${HOME}/development/pendo-appengine/tools/gitcmds/git-completion.bash"
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/grahamturner/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+eval "$(rbenv init -)"
+
+alias emacs="/usr/local/Caskroom/emacs/26.3/Emacs.app/Contents/MacOS/Emacs -nw"
+
+zstyle ':prompt:pure:prompt:success' color cyan
+zstyle ':prompt:pure:prompt:continuation' color cyan
+
+# make ctl-e and ctrl-a work normally
+bindkey -e
